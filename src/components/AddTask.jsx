@@ -3,17 +3,16 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 
 export const AddTask = ({tasks, setTasks}) => {
-    const formData;
-    const setFormData;
+    const [formData, setFormData] = useState();
     
     const addTask = async(e)=>{
         try{
             e.preventDefault();
-            const alreadyTask = tasks.findIndex(()=>
+            const alreadyTask = tasks.findIndex((task)=>
                 task.name === formData.name
             ) 
             if(alreadyTask === -1){
-                let { data } = await axios.post('http://localhost:39/v1/addTask', formData)
+                let { data } = await axios.post('https://todolist-ten-kohl.vercel.app/v1/add', formData)
                 if(data.ok === true){
                     setTasks([
                         ...tasks,
